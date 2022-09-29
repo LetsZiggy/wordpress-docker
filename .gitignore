@@ -1,0 +1,34 @@
+# ------------------------------ #
+# -----------General------------ #
+# ------------------------------ #
+
+# OS
+# Ref: https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
+# Ref: https://github.com/github/gitignore/blob/main/Global/Windows.gitignore
+# Ref: https://github.com/github/gitignore/blob/main/Global/Linux.gitignore
+.DS_Store
+Thumbs.db
+*.sh
+*.bat
+
+# Editors
+# Ref: https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+# Ref: https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
+# Ref: https://github.com/github/gitignore/blob/main/Global/SublimeText.gitignore
+.history
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.sublime-workspace
+
+# Dependencies
+vendor
+node_modules
+.pnpm-debug.log
+
+# Env
+*.env
+!*.example.env
