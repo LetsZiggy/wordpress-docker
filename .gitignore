@@ -32,3 +32,12 @@ node_modules
 # Env
 *.env
 !*.example.env
+
+# wordpress-apache
+apache-dev/apache/*
+apache-dev/certs/*
+apache-dev/mariadb/*
+apache-dev/php/*
+apache-dev/wordpress/*
+!apache-dev/wordpress/plugins
+!apache-dev/wordpress/themes
