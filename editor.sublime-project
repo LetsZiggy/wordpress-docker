@@ -20,7 +20,14 @@
 				"venv.bak",
 				"ENV",
 				"__pycache__",
+				"apache-dev",
 			],
+			"follow_symlinks": true,
+		},
+		{
+			"path": "apache-dev",
+			"name": "apache-dev",
+			"folder_exclude_patterns": [],
 			"follow_symlinks": true,
 		},
 	],
@@ -63,6 +70,7 @@
 					"validate": ["javascript", "typescript"],
 					"workingDirectories": [
 						"${project_path}",
+						"${project_path}/apache-dev",
 					],
 				},
 				"selector": "source.js | source.ts",
