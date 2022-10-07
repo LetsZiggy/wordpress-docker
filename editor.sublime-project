@@ -3,12 +3,18 @@
 		{
 			"path": ".",
 			"name": "root",
-			"folder_exclude_patterns": [ ".svn", ".git", ".hg", "CVS", "node_modules", "vendor", "apache-dev" ],
+			"folder_exclude_patterns": [ ".svn", ".git", ".hg", "CVS", "node_modules", "vendor", "apache-dev", "nginx-dev" ],
 			"follow_symlinks": true,
 		},
 		{
 			"path": "apache-dev",
 			"name": "apache-dev",
+			"folder_exclude_patterns": [],
+			"follow_symlinks": true,
+		},
+		{
+			"path": "nginx-dev",
+			"name": "nginx-dev",
 			"folder_exclude_patterns": [],
 			"follow_symlinks": true,
 		},
