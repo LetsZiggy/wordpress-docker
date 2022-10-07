@@ -92,3 +92,12 @@ apache-dev/php/*
 apache-dev/wordpress/*
 !apache-dev/wordpress/plugins
 !apache-dev/wordpress/themes
+
+# wordpress-nginx
+nginx-dev/certs/*
+nginx-dev/mariadb/*
+nginx-dev/nginx/*
+nginx-dev/php/*
+nginx-dev/wordpress/*
+!nginx-dev/wordpress/plugins
+!nginx-dev/wordpress/themes

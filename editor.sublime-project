@@ -24,12 +24,19 @@
 				"*.egg-info",
 
 				"apache-dev",
+				"nginx-dev",
 			],
 			"follow_symlinks": true,
 		},
 		{
 			"path": "apache-dev",
 			"name": "apache-dev",
+			"folder_exclude_patterns": [],
+			"follow_symlinks": true,
+		},
+		{
+			"path": "nginx-dev",
+			"name": "nginx-dev",
 			"folder_exclude_patterns": [],
 			"follow_symlinks": true,
 		},
@@ -74,6 +81,7 @@
 					"workingDirectories": [
 						"${project_path}",
 						"${project_path}/apache-dev",
+						"${project_path}/nginx-dev",
 					],
 				},
 				"selector": "source.js | source.ts",
