@@ -1,0 +1,112 @@
+# --------------- --------------- --------------- #
+
+networks:
+
+  wordpress-network:
+
+# --------------- --------------- --------------- #
+
+volumes:
+
+  socket:
+
+# --------------- --------------- --------------- #
+
+services:
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb:latest
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    networks:
+      - wordpress-network
+    ports:
+      - 18766:3306
+    env_file:
+      - development.env
+
+  # phpmyadmin:
+  #   container_name: phpmyadmin
+  #   depends_on:
+  #     - mariadb
+  #   image: phpmyadmin:latest
+  #   networks:
+  #     - wordpress-network
+  #   ports:
+  #     - 8080:80
+  #   env_file:
+  #     - development.env
+
+  adminer:
+    container_name: adminer
+    depends_on:
+      - mariadb
+    image: adminer:latest
+    networks:
+      - wordpress-network
+    ports:
+      - 8080:8080
+    env_file:
+      - development.env
+
+  nginx:
+    container_name: nginx
+    depends_on:
+      - mariadb
+      - wordpress
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    image: nginx:latest-ssl
+    volumes:
+      - socket:/tmp
+
+      - ./nginx/access.log:/var/log/nginx/access.log
+      - ./nginx/error.log:/var/log/nginx/error.log
+
+      # - ./wordpress/themes/[custom-theme-name]:/var/www/html/wp-content/themes/[custom-theme-name]
+      # - ./wordpress/plugins/[custom-plugin-name]:/var/www/html/wp-content/plugins/[custom-plugin-name]
+      - ./wordpress/wordpress:/var/www/html
+    networks:
+      - wordpress-network
+    ports:
+      - 80:80
+      - 443:443
+
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    build:
+      context: .
+      dockerfile: wordpress.dockerfile
+    image: wordpress:fpm-ssl
+    volumes:
+      - socket:/tmp
+
+      # - ./wordpress/themes/[custom-theme-name]:/var/www/html/wp-content/themes/[custom-theme-name]
+      # - ./wordpress/plugins/[custom-plugin-name]:/var/www/html/wp-content/plugins/[custom-plugin-name]
+      - ./wordpress/wordpress:/var/www/html
+    networks:
+      - wordpress-network
+    # ports:
+    #   - 9000:9000 # Use socket instead, commented for documentation
+    env_file:
+      - development.env
+
+  wp-cli:
+    container_name: wp-cli
+    depends_on:
+      - mariadb
+      - wordpress
+    image: wordpress:cli
+    volumes:
+      # - ./wordpress/themes/[custom-theme-name]:/var/www/html/wp-content/themes/[custom-theme-name]
+      # - ./wordpress/plugins/[custom-plugin-name]:/var/www/html/wp-content/plugins/[custom-plugin-name]
+      - ./wordpress/wordpress:/var/www/html
+    networks:
+      - wordpress-network
+    env_file:
+      - development.env
+    user: 33:33 # https://github.com/docker-library/docs/tree/master/wordpress#running-as-an-arbitrary-user
